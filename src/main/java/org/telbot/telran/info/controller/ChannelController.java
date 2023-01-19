@@ -1,6 +1,7 @@
 package org.telbot.telran.info.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.web.bind.annotation.*;
 import org.telbot.telran.info.model.Channel;
 import org.telbot.telran.info.service.ChannelService;
@@ -8,7 +9,7 @@ import org.telbot.telran.info.service.ChannelService;
 import java.util.List;
 
 @RestController
-@RequestMapping("channels")
+@RequestMapping("/channels")
 public class ChannelController {
 
     @Autowired
@@ -34,7 +35,7 @@ public class ChannelController {
         return channelService.updateChannel(channel);
     }
 
-    @GetMapping("/{id}")
+    @DeleteMapping("/{id}")
     public void deleteChannel(@PathVariable(name = "id") int id) {
         channelService.deleteChannel(id);
     }

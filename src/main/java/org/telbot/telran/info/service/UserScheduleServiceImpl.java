@@ -13,6 +13,10 @@ public class UserScheduleServiceImpl implements UserScheduleService {
     @Autowired
     private UserScheduleRepository userScheduleRepository;
 
+    @Autowired
+    private UserService userService;
+
+
     @Override
     public List<UserSchedule> listAllUserSchedule() {
         return userScheduleRepository.findAll();
@@ -30,11 +34,20 @@ public class UserScheduleServiceImpl implements UserScheduleService {
 
     @Override
     public UserSchedule updateUserSchedule(UserSchedule userSchedule) {
-        return null;
+        if (userSchedule.getId() == 0) {
+            throw new IllegalArgumentException("You entered incorrect ID for user schedule");
+        }
+        int userScheduleId = userSchedule.getId();
+        UserSchedule entity = userScheduleRepository.findById(userScheduleId).orElse(null);
+        if (entity != null) {
+            entity.setUserScheduleForChannel(entity.getUserScheduleForChannel());
+            userScheduleRepository.save(entity);
+        }
+        return entity;
     }
 
     @Override
     public void deleteUserSchedule(int id) {
-        userScheduleRepository.deleteById(id);
+        userScheduleRepository.delete(getUserSchedule(id));
     }
 }

@@ -30,11 +30,21 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User updateUser(User user) {
-        return null;
+        if (user.getId() == 0) {
+            throw new IllegalArgumentException("You entered incorrect ID for user");
+        }
+        int userId = user.getId();
+        User entity = userRepository.findById(userId).orElse(null);
+        if (entity != null) {
+            entity.setUserName(entity.getUserName());
+            entity.setCurrentLastEventId(entity.getCurrentLastEventId());
+            userRepository.save(entity);
+        }
+        return entity;
     }
 
     @Override
     public void deleteUser(int id) {
-        userRepository.deleteById(id);
+        userRepository.delete(getUser(id));
     }
 }

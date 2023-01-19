@@ -15,4 +15,8 @@ public interface UserScheduleService {
     UserSchedule updateUserSchedule(UserSchedule userSchedule);
 
     void deleteUserSchedule(int id);
+//
+//    void addScheduleToUser(int userScheduleId, int userId);
+//
+//    void removeScheduleFromUser(int userScheduleId, int userId);
 }

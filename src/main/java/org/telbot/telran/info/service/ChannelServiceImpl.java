@@ -30,11 +30,21 @@ public class ChannelServiceImpl implements ChannelService {
 
     @Override
     public Channel updateChannel(Channel channel) {
-        return null;
+        if (channel.getId() == 0) {
+            throw new IllegalArgumentException("You entered incorrect ID for channel");
+        }
+        int channelId = channel.getId();
+        Channel entity = channelRepository.findById(channelId).orElse(null);
+        if (entity != null) {
+            entity.setName(entity.getName());
+            entity.setGroupId(entity.getGroupId());
+            channelRepository.save(entity);
+        }
+        return entity;
     }
 
     @Override
     public void deleteChannel(int id) {
-        channelRepository.deleteById(id);
+        channelRepository.delete(getChannel(id));
     }
 }

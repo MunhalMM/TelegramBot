@@ -2,17 +2,27 @@ package org.telbot.telran.info.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.telbot.telran.info.model.Channel;
+import org.telbot.telran.info.model.User;
 import org.telbot.telran.info.model.UserChannel;
+import org.telbot.telran.info.service.ChannelService;
 import org.telbot.telran.info.service.UserChannelService;
+import org.telbot.telran.info.service.UserService;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("user_channels")
+@RequestMapping("/user_channels")
 public class UserChannelController {
 
     @Autowired
     private UserChannelService userChannelService;
+
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    private ChannelService channelService;
 
 
     @GetMapping
@@ -35,8 +45,18 @@ public class UserChannelController {
         return userChannelService.updateUserChannel(userChannel);
     }
 
-    @GetMapping("/{id}")
+    @DeleteMapping("/{id}")
     public void deleteUserChannel(@PathVariable(name = "id") int id) {
         userChannelService.deleteUserChannel(id);
+    }
+
+    @PostMapping("/{userId}/{channelId}")
+    public void addSubscription(@PathVariable(name = "userId") int userId, @PathVariable(name = "channelId") int channelId) {
+        userChannelService.addSubscription(userService.getUser(userId), channelService.getChannel(channelId));
+    }
+
+    @GetMapping("/{userId}")
+    public List<Channel> findAllChannelByUser(@PathVariable(name = "userId") int userId) {
+        return userChannelService.findAllChannelByUser(userService.getUser(userId));
     }
 }

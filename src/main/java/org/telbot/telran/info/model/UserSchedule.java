@@ -3,32 +3,52 @@ package org.telbot.telran.info.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "user_schedules")
+@Table(name = "user_schedule")
 public class UserSchedule {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    private int userScheduleId;
+    private int id;
+
+    @Column(name = "user_id")
+    private int userId;
+
+    @Column(name = "user_schedule_for_channel")
+    private int userScheduleForChannel;
 
     public UserSchedule() {
         //
     }
 
-    public UserSchedule(int userScheduleId) {
-        this.userScheduleId = userScheduleId;
+    public int getId() {
+        return id;
     }
 
-    public int getUserScheduleId() {
-        return userScheduleId;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public void setUserScheduleId(int userScheduleId) {
-        this.userScheduleId = userScheduleId;
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public int getUserScheduleForChannel() {
+        return userScheduleForChannel;
+    }
+
+    public void setUserScheduleForChannel(int userScheduleForChannel) {
+        this.userScheduleForChannel = userScheduleForChannel;
     }
 
     @Override
     public String toString() {
         return "UserSchedule{" +
-                "userScheduleId=" + userScheduleId +
+                "id=" + id +
+                ", userId=" + userId +
+                ", userScheduleForChannel=" + userScheduleForChannel +
                 '}';
     }
 }

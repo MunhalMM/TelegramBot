@@ -3,32 +3,40 @@ package org.telbot.telran.info.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "events")
+@Table(name = "event")
 public class Event {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    private int eventId;
+    private int id;
+
+    @Column(name = "event_for_user_channel")
+    private String eventForUserChannel;
 
     public Event() {
         //
     }
 
-    public Event(int eventId) {
-        this.eventId = eventId;
+    public int getId() {
+        return id;
     }
 
-    public int getEventId() {
-        return eventId;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public void setEventId(int eventId) {
-        this.eventId = eventId;
+    public String getEventForChannel() {
+        return eventForUserChannel;
+    }
+
+    public void setEventForChannel(String eventForChannel) {
+        this.eventForUserChannel = eventForChannel;
     }
 
     @Override
     public String toString() {
         return "Event{" +
-                "eventId=" + eventId +
+                "id=" + id +
+                ", eventForUserChannel='" + eventForUserChannel + '\'' +
                 '}';
     }
 }

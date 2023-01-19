@@ -5,19 +5,12 @@ import org.springframework.web.bind.annotation.*;
 import org.telbot.telran.info.model.UserSchedule;
 import org.telbot.telran.info.service.UserScheduleService;
 
-import java.util.List;
-
 @RestController
-@RequestMapping("user_schedules")
+@RequestMapping("/user_schedules")
 public class UserScheduleController {
 
     @Autowired
     private UserScheduleService userScheduleService;
-
-    @GetMapping
-    public List<UserSchedule> listAllUserSchedule() {
-        return userScheduleService.listAllUserSchedule();
-    }
 
     @GetMapping("/{id}")
     public UserSchedule getUserSchedule(@PathVariable(name = "id") int id) {
@@ -34,7 +27,7 @@ public class UserScheduleController {
         return userScheduleService.updateUserSchedule(userSchedule);
     }
 
-    @GetMapping("/{id}")
+    @DeleteMapping("/{id}")
     public void deleteUserSchedule(@PathVariable(name = "id") int id) {
         userScheduleService.deleteUserSchedule(id);
     }

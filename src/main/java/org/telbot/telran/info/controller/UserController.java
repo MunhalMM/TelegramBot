@@ -8,7 +8,7 @@ import org.telbot.telran.info.service.UserService;
 import java.util.List;
 
 @RestController
-@RequestMapping("users")
+@RequestMapping("/users")
 public class UserController {
 
     @Autowired
@@ -34,7 +34,7 @@ public class UserController {
         return userService.updateUser(user);
     }
 
-    @GetMapping("/{id}")
+    @DeleteMapping("/{id}")
     public void deleteUser(@PathVariable(name = "id") int id) {
         userService.deleteUser(id);
     }

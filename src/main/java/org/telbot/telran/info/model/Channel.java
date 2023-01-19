@@ -3,44 +3,52 @@ package org.telbot.telran.info.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "channels")
+@Table(name = "channel")
 public class Channel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    private int channelId;
-    @Column(name = "channel_name")
-    private String channelName;
+    private int id;
+    @Column(name = "name")
+    private String name;
+
+    @Column(name = "group_id")
+    private long groupId;
 
     public Channel() {
         //
     }
 
-    public Channel(int channelId, String channelName) {
-        this.channelId = channelId;
-        this.channelName = channelName;
+    public int getId() {
+        return id;
     }
 
-    public int getChannelId() {
-        return channelId;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public void setChannelId(int channelId) {
-        this.channelId = channelId;
+    public String getName() {
+        return name;
     }
 
-    public String getChannelName() {
-        return channelName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setChannelName(String channelName) {
-        this.channelName = channelName;
+    public long getGroupId() {
+        return groupId;
     }
+
+    public void setGroupId(long groupId) {
+        this.groupId = groupId;
+    }
+
 
     @Override
     public String toString() {
         return "Channel{" +
-                "channelId=" + channelId +
-                ", channelName='" + channelName + '\'' +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", groupId=" + groupId +
                 '}';
     }
 }

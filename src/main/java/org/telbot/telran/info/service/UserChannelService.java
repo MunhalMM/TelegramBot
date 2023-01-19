@@ -1,5 +1,7 @@
 package org.telbot.telran.info.service;
 
+import org.telbot.telran.info.model.Channel;
+import org.telbot.telran.info.model.User;
 import org.telbot.telran.info.model.UserChannel;
 
 import java.util.List;
@@ -15,4 +17,10 @@ public interface UserChannelService {
     UserChannel updateUserChannel(UserChannel userChannel);
 
     void deleteUserChannel(int id);
+
+    void addSubscription(User user, Channel channel);
+
+    List<Channel> findAllChannelByUser(User user);
+
+    boolean isTheBotActiveOrNot(User user);
 }

@@ -30,11 +30,20 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public Event updateEvent(Event event) {
-        return null;
+        if (event.getId() == 0) {
+            throw new IllegalArgumentException("You entered incorrect ID for event");
+        }
+        int eventId = event.getId();
+        Event entity = eventRepository.findById(eventId).orElse(null);
+        if (entity != null) {
+            entity.setEventForChannel(entity.getEventForChannel());
+            eventRepository.save(entity);
+        }
+        return entity;
     }
 
     @Override
     public void deleteEvent(int id) {
-        eventRepository.deleteById(id);
+        eventRepository.delete(getEvent(id));
     }
 }

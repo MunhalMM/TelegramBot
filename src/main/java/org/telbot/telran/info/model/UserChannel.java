@@ -1,45 +1,65 @@
 package org.telbot.telran.info.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
-@Table(name = "user_channels")
+@Table(name = "user_channel")
 public class UserChannel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    private int userChannelId;
-    @Column(name = "user_channel_name")
-    private String userChannelName;
+    private int id;
+
+    @Column(name = "user_id")
+    private int userId;
+
+    @Column(name = "channel_id")
+    private int channelId;
+
+//    @OneToMany(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "user_channel_id", referencedColumnName = "id")
+//    private List<Channel> channels = new ArrayList<>();
 
     public UserChannel() {
+        //
     }
 
-    public UserChannel(int userChannelId, String userChannelName) {
-        this.userChannelId = userChannelId;
-        this.userChannelName = userChannelName;
+    public UserChannel(int userId, int channelId) {
+        this.userId = userId;
+        this.channelId = channelId;
     }
 
-    public int getUserChannelId() {
-        return userChannelId;
+    public int getId() {
+        return id;
     }
 
-    public void setUserChannelId(int userChannelId) {
-        this.userChannelId = userChannelId;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getUserChannelName() {
-        return userChannelName;
+
+//    public List<Channel> getChannels() {
+//        return channels;
+//    }
+//
+//    public void setChannels(List<Channel> channels) {
+//        this.channels = channels;
+//    }
+
+    public int getUserId() {
+        return userId;
     }
 
-    public void setUserChannelName(String userChannelName) {
-        this.userChannelName = userChannelName;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
-    @Override
-    public String toString() {
-        return "UserChannel{" +
-                "userChannelId=" + userChannelId +
-                ", userChannelName='" + userChannelName + '\'' +
-                '}';
+    public int getChannelId() {
+        return channelId;
+    }
+
+    public void setChannelId(int channelId) {
+        this.channelId = channelId;
     }
 }
