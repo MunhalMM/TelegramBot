@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "telegram_message")
-public class TelegramMessage {
+public class Message {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private int id;
@@ -19,18 +19,18 @@ public class TelegramMessage {
 
     private boolean isNew = true;
 
-    public TelegramMessage() {
+    public Message() {
         //
     }
 
-    public TelegramMessage(String groupTitle, long groupId, String text, String userName) {
+    public Message(String groupTitle, long groupId, String text, String userName) {
         this.groupTitle = groupTitle;
         this.groupId = groupId;
         this.text = text;
         this.userName = userName;
     }
 
-    public TelegramMessage(long channelId, String text, String userName, String title) {
+    public Message(long channelId, String text, String userName, String title) {
         //
     }
 

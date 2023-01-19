@@ -2,34 +2,32 @@ package org.telbot.telran.info.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.telbot.telran.info.model.TelegramMessage;
-import org.telbot.telran.info.repository.TelegramMessageRepository;
-import org.telegram.telegrambots.bots.TelegramLongPollingBot;
-import org.telegram.telegrambots.meta.api.objects.Update;
+import org.telbot.telran.info.model.Message;
+import org.telbot.telran.info.repository.MessageRepository;
 
 
 import java.util.List;
 
 @Service
-public class TelegramMessageServiceImpl implements TelegramMessageService {
+public class MessageServiceImpl implements MessageService {
 
     @Autowired
-    private TelegramMessageRepository telegramMessageRepository;
+    private MessageRepository telegramMessageRepository;
 
 
     @Override
-    public List<TelegramMessage> findAllMessage() {
+    public List<Message> findAllMessage() {
         return telegramMessageRepository.findAll();
     }
 
     @Override
-    public TelegramMessage getMessage(int id) {
+    public Message getMessage(int id) {
         return telegramMessageRepository.findById(id).orElse(null);
     }
 
     @Override
     public void addMessage(long channelId, String text, String userName, String title) {
-        TelegramMessage telegramMessage = new TelegramMessage(channelId, text, userName, title);
+        Message telegramMessage = new Message(channelId, text, userName, title);
         telegramMessageRepository.save(telegramMessage);
     }
 

@@ -12,17 +12,17 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 public class TelegramBot extends TelegramLongPollingBot {
 
     @Autowired
-    private TelegramMessageService telegramMessageService;
+    private MessageService telegramMessageService;
 
 
     @Override
     public String getBotUsername() {
-        return "Mario_java_bot";
+        return "*****";
     }
 
     @Override
     public String getBotToken() {
-        return "5787130209:AAEjQyylcbVoTRU_AxBwfRscvvyublN--uY";
+        return "*******";
     }
 
     @Override
