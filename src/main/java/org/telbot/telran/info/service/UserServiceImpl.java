@@ -19,7 +19,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getUser(int id) {
+    public User getUser(long id) {
         return userRepository.findById(id).orElse(null);
     }
 
@@ -33,7 +33,7 @@ public class UserServiceImpl implements UserService {
         if (user.getId() == 0) {
             throw new IllegalArgumentException("You entered incorrect ID for user");
         }
-        int userId = user.getId();
+        long userId = user.getId();
         User entity = userRepository.findById(userId).orElse(null);
         if (entity != null) {
             entity.setUserName(entity.getUserName());
@@ -44,7 +44,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void deleteUser(int id) {
+    public void deleteUser(long id) {
         userRepository.delete(getUser(id));
     }
 }

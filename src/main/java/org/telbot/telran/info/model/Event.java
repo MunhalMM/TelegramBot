@@ -7,7 +7,7 @@ import javax.persistence.*;
 public class Event {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    private int id;
+    private long id;
 
     @Column(name = "event_for_user_channel")
     private String eventForUserChannel;
@@ -16,11 +16,11 @@ public class Event {
         //
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

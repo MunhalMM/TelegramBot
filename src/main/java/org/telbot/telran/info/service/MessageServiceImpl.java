@@ -21,19 +21,25 @@ public class MessageServiceImpl implements MessageService {
     }
 
     @Override
-    public Message getMessage(int id) {
+    public Message getMessage(long id) {
         return telegramMessageRepository.findById(id).orElse(null);
     }
 
+
     @Override
-    public void addMessage(long channelId, String text, String userName, String title) {
-        Message telegramMessage = new Message(channelId, text, userName, title);
+    public void addMessage(String groupTitle, long groupId, String text, String userName) {
+        Message telegramMessage = new Message(groupTitle, groupId, text, userName);
         telegramMessageRepository.save(telegramMessage);
     }
 
 
     @Override
-    public void deleteMessage(int id) {
+    public void deleteMessage(long id) {
         telegramMessageRepository.deleteById(id);
+    }
+
+    @Override
+    public List<Message> listAllNewMessages() {
+        return telegramMessageRepository.findAllNewMessages();
     }
 }

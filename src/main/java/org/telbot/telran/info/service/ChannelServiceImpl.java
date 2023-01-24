@@ -19,7 +19,12 @@ public class ChannelServiceImpl implements ChannelService {
     }
 
     @Override
-    public Channel getChannel(int id) {
+    public List<Channel> listAllChannelById(List<Long> listId) {
+        return channelRepository.findAllById(listId);
+    }
+
+    @Override
+    public Channel getChannel(long id) {
         return channelRepository.findById(id).orElse(null);
     }
 
@@ -33,7 +38,7 @@ public class ChannelServiceImpl implements ChannelService {
         if (channel.getId() == 0) {
             throw new IllegalArgumentException("You entered incorrect ID for channel");
         }
-        int channelId = channel.getId();
+        long channelId = channel.getId();
         Channel entity = channelRepository.findById(channelId).orElse(null);
         if (entity != null) {
             entity.setName(entity.getName());
@@ -44,7 +49,7 @@ public class ChannelServiceImpl implements ChannelService {
     }
 
     @Override
-    public void deleteChannel(int id) {
+    public void deleteChannel(long id) {
         channelRepository.delete(getChannel(id));
     }
 }

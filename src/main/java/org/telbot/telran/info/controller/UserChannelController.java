@@ -3,7 +3,6 @@ package org.telbot.telran.info.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.telbot.telran.info.model.Channel;
-import org.telbot.telran.info.model.User;
 import org.telbot.telran.info.model.UserChannel;
 import org.telbot.telran.info.service.ChannelService;
 import org.telbot.telran.info.service.UserChannelService;
@@ -59,4 +58,5 @@ public class UserChannelController {
     public List<Channel> findAllChannelByUser(@PathVariable(name = "userId") int userId) {
         return userChannelService.findAllChannelByUser(userService.getUser(userId));
     }
+
 }

@@ -7,9 +7,9 @@ import javax.persistence.*;
 public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    private int id;
+    private long id;
     @Column(name = "current_last_event_id")
-    private int currentLastEventId;
+    private long currentLastEventId;
     @Column(name = "user_name")
     private String userName;
 
@@ -17,19 +17,24 @@ public class User {
         //
     }
 
-    public int getId() {
+    public User(long id, String userName) {
+        this.id = id;
+        this.userName = userName;
+    }
+
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
-    public int getCurrentLastEventId() {
+    public long getCurrentLastEventId() {
         return currentLastEventId;
     }
 
-    public void setCurrentLastEventId(int currentLastEventId) {
+    public void setCurrentLastEventId(long currentLastEventId) {
         this.currentLastEventId = currentLastEventId;
     }
 

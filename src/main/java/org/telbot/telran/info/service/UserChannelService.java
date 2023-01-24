@@ -10,13 +10,13 @@ public interface UserChannelService {
 
     List<UserChannel> listAllUserChannel();
 
-    UserChannel getUserChannel(int id);
+    UserChannel getUserChannel(long id);
 
     UserChannel createUserChannel(UserChannel userChannel);
 
     UserChannel updateUserChannel(UserChannel userChannel);
 
-    void deleteUserChannel(int id);
+    void deleteUserChannel(long id);
 
     void addSubscription(User user, Channel channel);
 

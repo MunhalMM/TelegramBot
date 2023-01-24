@@ -8,13 +8,13 @@ public interface UserScheduleService {
 
     List<UserSchedule> listAllUserSchedule();
 
-    UserSchedule getUserSchedule(int id);
+    UserSchedule getUserSchedule(long id);
 
     UserSchedule createUserSchedule(UserSchedule userSchedule);
 
     UserSchedule updateUserSchedule(UserSchedule userSchedule);
 
-    void deleteUserSchedule(int id);
+    void deleteUserSchedule(long id);
 //
 //    void addScheduleToUser(int userScheduleId, int userId);
 //

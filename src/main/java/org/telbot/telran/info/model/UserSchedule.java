@@ -7,39 +7,39 @@ import javax.persistence.*;
 public class UserSchedule {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    private int id;
+    private long id;
 
     @Column(name = "user_id")
-    private int userId;
+    private long userId;
 
     @Column(name = "user_schedule_for_channel")
-    private int userScheduleForChannel;
+    private long userScheduleForChannel;
 
     public UserSchedule() {
         //
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
-    public int getUserId() {
+    public long getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(long userId) {
         this.userId = userId;
     }
 
-    public int getUserScheduleForChannel() {
+    public long getUserScheduleForChannel() {
         return userScheduleForChannel;
     }
 
-    public void setUserScheduleForChannel(int userScheduleForChannel) {
+    public void setUserScheduleForChannel(long userScheduleForChannel) {
         this.userScheduleForChannel = userScheduleForChannel;
     }
 

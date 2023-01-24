@@ -8,11 +8,13 @@ public interface ChannelService {
 
     List<Channel> listAllChannel();
 
-    Channel getChannel(int id);
+    List<Channel> listAllChannelById(List<Long> listId);
+
+    Channel getChannel(long id);
 
     Channel createChannel(Channel channel);
 
     Channel updateChannel(Channel channel);
 
-    void deleteChannel(int id);
+    void deleteChannel(long id);
 }

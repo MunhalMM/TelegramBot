@@ -8,9 +8,12 @@ public interface MessageService {
 
     List<Message> findAllMessage();
 
-    Message getMessage(int id);
+    Message getMessage(long id);
 
-    void addMessage(long  channelId, String text, String userName, String title);
+    void addMessage(String groupTitle, long groupId, String text, String userName);
 
-    void deleteMessage(int id);
+    void deleteMessage(long id);
+
+    List<Message> listAllNewMessages();
+
 }

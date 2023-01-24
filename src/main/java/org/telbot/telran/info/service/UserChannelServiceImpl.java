@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 import org.telbot.telran.info.model.Channel;
 import org.telbot.telran.info.model.User;
 import org.telbot.telran.info.model.UserChannel;
-import org.telbot.telran.info.repository.ChannelRepository;
 import org.telbot.telran.info.repository.UserChannelRepository;
 
 import java.util.List;
@@ -18,7 +17,7 @@ public class UserChannelServiceImpl implements UserChannelService {
     private UserChannelRepository userChannelRepository;
 
     @Autowired
-    private ChannelRepository channelRepository;
+    private ChannelService channelService;
 
     @Override
     public List<UserChannel> listAllUserChannel() {
@@ -26,7 +25,7 @@ public class UserChannelServiceImpl implements UserChannelService {
     }
 
     @Override
-    public UserChannel getUserChannel(int id) {
+    public UserChannel getUserChannel(long id) {
         return userChannelRepository.findById(id).orElse(null);
     }
 
@@ -40,7 +39,7 @@ public class UserChannelServiceImpl implements UserChannelService {
         if (userChannel.getId() == 0) {
             throw new IllegalArgumentException("You entered incorrect ID for user channel");
         }
-        int id = userChannel.getId();
+        long id = userChannel.getId();
         UserChannel entity = userChannelRepository.findById(id).orElse(null);
         if (entity != null) {
             entity.setChannelId(entity.getChannelId());
@@ -51,7 +50,7 @@ public class UserChannelServiceImpl implements UserChannelService {
     }
 
     @Override
-    public void deleteUserChannel(int id) {
+    public void deleteUserChannel(long id) {
         userChannelRepository.delete(getUserChannel(id));
     }
 
@@ -62,9 +61,9 @@ public class UserChannelServiceImpl implements UserChannelService {
 
     @Override
     public List<Channel> findAllChannelByUser(User user) {
-        List<Integer> channelIds = userChannelRepository.findAllByUserId(user.getId()).stream()
+        List<Long> channelIds = userChannelRepository.findAllByUserId(user.getId()).stream()
                 .map(UserChannel::getChannelId).collect(Collectors.toList());
-        return channelRepository.findAllById(channelIds);
+        return channelService.listAllChannelById(channelIds);
     }
 
     @Override

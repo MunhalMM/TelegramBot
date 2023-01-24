@@ -1,21 +1,19 @@
 package org.telbot.telran.info.model;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table(name = "user_channel")
 public class UserChannel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    private int id;
+    private long id;
 
     @Column(name = "user_id")
-    private int userId;
+    private long userId;
 
     @Column(name = "channel_id")
-    private int channelId;
+    private long channelId;
 
 //    @OneToMany(cascade = CascadeType.ALL)
 //    @JoinColumn(name = "user_channel_id", referencedColumnName = "id")
@@ -25,16 +23,16 @@ public class UserChannel {
         //
     }
 
-    public UserChannel(int userId, int channelId) {
+    public UserChannel(long userId, long channelId) {
         this.userId = userId;
         this.channelId = channelId;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -47,19 +45,19 @@ public class UserChannel {
 //        this.channels = channels;
 //    }
 
-    public int getUserId() {
+    public long getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(long userId) {
         this.userId = userId;
     }
 
-    public int getChannelId() {
+    public long getChannelId() {
         return channelId;
     }
 
-    public void setChannelId(int channelId) {
+    public void setChannelId(long channelId) {
         this.channelId = channelId;
     }
 }

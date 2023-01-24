@@ -7,7 +7,7 @@ import javax.persistence.*;
 public class Channel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    private int id;
+    private long id;
     @Column(name = "name")
     private String name;
 
@@ -18,11 +18,11 @@ public class Channel {
         //
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

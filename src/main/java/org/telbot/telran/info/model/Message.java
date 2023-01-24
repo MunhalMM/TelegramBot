@@ -3,11 +3,11 @@ package org.telbot.telran.info.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "telegram_message")
+@Table(name = "message")
 public class Message {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    private int id;
+    private long id;
     @Column(name = "group_title")
     private String groupTitle;
     @Column(name = "group_id")
@@ -28,17 +28,14 @@ public class Message {
         this.groupId = groupId;
         this.text = text;
         this.userName = userName;
+
     }
 
-    public Message(long channelId, String text, String userName, String title) {
-        //
-    }
-
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -74,14 +71,23 @@ public class Message {
         this.userName = userName;
     }
 
+    public boolean isNew() {
+        return isNew;
+    }
+
+    public void setNew(boolean aNew) {
+        isNew = aNew;
+    }
+
     @Override
     public String toString() {
-        return "TelegramMessage{" +
+        return "Message{" +
                 "id=" + id +
                 ", groupTitle='" + groupTitle + '\'' +
                 ", groupId=" + groupId +
                 ", text='" + text + '\'' +
                 ", userName='" + userName + '\'' +
+                ", isNew=" + isNew +
                 '}';
     }
 }

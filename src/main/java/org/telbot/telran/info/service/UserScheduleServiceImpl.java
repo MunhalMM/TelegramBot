@@ -23,7 +23,7 @@ public class UserScheduleServiceImpl implements UserScheduleService {
     }
 
     @Override
-    public UserSchedule getUserSchedule(int id) {
+    public UserSchedule getUserSchedule(long id) {
         return userScheduleRepository.findById(id).orElse(null);
     }
 
@@ -37,7 +37,7 @@ public class UserScheduleServiceImpl implements UserScheduleService {
         if (userSchedule.getId() == 0) {
             throw new IllegalArgumentException("You entered incorrect ID for user schedule");
         }
-        int userScheduleId = userSchedule.getId();
+        long userScheduleId = userSchedule.getId();
         UserSchedule entity = userScheduleRepository.findById(userScheduleId).orElse(null);
         if (entity != null) {
             entity.setUserScheduleForChannel(entity.getUserScheduleForChannel());
@@ -47,7 +47,7 @@ public class UserScheduleServiceImpl implements UserScheduleService {
     }
 
     @Override
-    public void deleteUserSchedule(int id) {
+    public void deleteUserSchedule(long id) {
         userScheduleRepository.delete(getUserSchedule(id));
     }
 }
