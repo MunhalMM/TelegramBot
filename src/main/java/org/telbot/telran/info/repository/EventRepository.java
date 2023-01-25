@@ -7,7 +7,7 @@ import org.telbot.telran.info.model.User;
 
 import java.util.List;
 
-@Repository
+
 public interface EventRepository extends JpaRepository<Event, Long> {
     //List<Event> getNewEventsByUser(User user);
 }

@@ -37,7 +37,6 @@ public class UserServiceImpl implements UserService {
         User entity = userRepository.findById(userId).orElse(null);
         if (entity != null) {
             entity.setUserName(entity.getUserName());
-            entity.setCurrentLastEventId(entity.getCurrentLastEventId());
             userRepository.save(entity);
         }
         return entity;

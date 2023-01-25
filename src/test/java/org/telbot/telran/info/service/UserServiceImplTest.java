@@ -43,7 +43,7 @@ class UserServiceImplTest {
     void createUser() {
         List<User> all = userRepository.findAll();
         assertEquals(0, all.size());
-        User user = new User(14, "UserOne");
+        User user = new User(1, "UserOne");
         userService.createUser(user);
         List<User> all1 = userRepository.findAll();
         assertEquals(1, all1.size());

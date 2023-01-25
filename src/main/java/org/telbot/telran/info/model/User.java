@@ -3,13 +3,11 @@ package org.telbot.telran.info.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "user")
+@Table(name = "user_")
 public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private long id;
-    @Column(name = "current_last_event_id")
-    private long currentLastEventId;
     @Column(name = "user_name")
     private String userName;
 
@@ -30,14 +28,6 @@ public class User {
         this.id = id;
     }
 
-    public long getCurrentLastEventId() {
-        return currentLastEventId;
-    }
-
-    public void setCurrentLastEventId(long currentLastEventId) {
-        this.currentLastEventId = currentLastEventId;
-    }
-
     public String getUserName() {
         return userName;
     }
@@ -51,7 +41,6 @@ public class User {
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", currentLastEventId=" + currentLastEventId +
                 ", userName='" + userName + '\'' +
                 '}';
     }

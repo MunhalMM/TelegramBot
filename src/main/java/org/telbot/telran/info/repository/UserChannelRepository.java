@@ -6,7 +6,7 @@ import org.telbot.telran.info.model.UserChannel;
 
 import java.util.List;
 
-@Repository
+
 public interface UserChannelRepository extends JpaRepository<UserChannel, Long> {
     List<UserChannel> findAllByUserId(long userId);
 

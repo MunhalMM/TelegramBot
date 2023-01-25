@@ -5,9 +5,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Import;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.telbot.telran.info.configuration.BotConfiguration;
-import org.telbot.telran.info.service.TelegramBot;
-
-import java.util.Arrays;
 
 @SpringBootApplication
 @Import(BotConfiguration.class)

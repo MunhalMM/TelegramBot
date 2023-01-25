@@ -15,10 +15,6 @@ public class UserChannel {
     @Column(name = "channel_id")
     private long channelId;
 
-//    @OneToMany(cascade = CascadeType.ALL)
-//    @JoinColumn(name = "user_channel_id", referencedColumnName = "id")
-//    private List<Channel> channels = new ArrayList<>();
-
     public UserChannel() {
         //
     }
@@ -35,15 +31,6 @@ public class UserChannel {
     public void setId(long id) {
         this.id = id;
     }
-
-
-//    public List<Channel> getChannels() {
-//        return channels;
-//    }
-//
-//    public void setChannels(List<Channel> channels) {
-//        this.channels = channels;
-//    }
 
     public long getUserId() {
         return userId;
