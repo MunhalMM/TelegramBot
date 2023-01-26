@@ -2,6 +2,7 @@ package org.telbot.telran.info.service;
 
 import org.springframework.stereotype.Service;
 import org.telbot.telran.info.commands.Command;
+
 @Service
 public class CommandServiceImpl implements CommandService {
 

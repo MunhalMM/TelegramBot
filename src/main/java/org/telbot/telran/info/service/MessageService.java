@@ -16,4 +16,6 @@ public interface MessageService {
 
     List<Message> listAllNewMessages();
 
+    public List<Message> getMessagesAndMarkThemOld();
+
 }

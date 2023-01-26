@@ -42,8 +42,8 @@ public class TelegramBot extends TelegramLongPollingBot implements Switchable {
 
     @Override
     public void onUpdateReceived(Update update) {
-        if (update.getMessage().isCommand()){
-            commandService.executeCommand(update.getMessage().getText(),this);
+        if (update.getMessage().isCommand()) {
+            commandService.executeCommand(update.getMessage().getText(), this);
             return;
         }
         if (!enabled) {

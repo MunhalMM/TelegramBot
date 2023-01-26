@@ -67,8 +67,8 @@ public class UserChannelServiceImpl implements UserChannelService {
     }
 
     @Override
-    public boolean isTheBotActiveOrNot(User user) {
-        return false;// here will be the code to on/off the bot
+    public List<UserChannel> findAllUserChannelsByChannelIdFromIdsList(List<Long> channelIds) {
+        return userChannelRepository.findAllUserChannelsByChannelIdFromIdsList(channelIds);
     }
 
 }

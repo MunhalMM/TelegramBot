@@ -30,7 +30,7 @@ public class UserChannelController {
     }
 
     @GetMapping("/{id}")
-    public UserChannel getUserChannel(@PathVariable(name = "id") int id) {
+    public UserChannel getUserChannel(@PathVariable(name = "id") long id) {
         return userChannelService.getUserChannel(id);
     }
 
@@ -45,17 +45,17 @@ public class UserChannelController {
     }
 
     @DeleteMapping("/{id}")
-    public void deleteUserChannel(@PathVariable(name = "id") int id) {
+    public void deleteUserChannel(@PathVariable(name = "id") long id) {
         userChannelService.deleteUserChannel(id);
     }
 
     @PostMapping("/{userId}/{channelId}")
-    public void addSubscription(@PathVariable(name = "userId") int userId, @PathVariable(name = "channelId") int channelId) {
+    public void addSubscription(@PathVariable(name = "userId") long userId, @PathVariable(name = "channelId") long channelId) {
         userChannelService.addSubscription(userService.getUser(userId), channelService.getChannel(channelId));
     }
 
     @GetMapping("/{userId}")
-    public List<Channel> findAllChannelByUser(@PathVariable(name = "userId") int userId) {
+    public List<Channel> findAllChannelByUser(@PathVariable(name = "userId") long userId) {
         return userChannelService.findAllChannelByUser(userService.getUser(userId));
     }
 

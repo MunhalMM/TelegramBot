@@ -22,5 +22,6 @@ public interface UserChannelService {
 
     List<Channel> findAllChannelByUser(User user);
 
-    boolean isTheBotActiveOrNot(User user);
+    List<UserChannel> findAllUserChannelsByChannelIdFromIdsList(List<Long> channelIds);
+
 }

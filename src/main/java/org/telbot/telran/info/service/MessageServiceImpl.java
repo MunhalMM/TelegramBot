@@ -42,4 +42,14 @@ public class MessageServiceImpl implements MessageService {
     public List<Message> listAllNewMessages() {
         return telegramMessageRepository.findAllNewMessages();
     }
+
+    @Override
+    public List<Message> getMessagesAndMarkThemOld() {
+        List<Message> messages = telegramMessageRepository.findAllNewMessages();
+        if (!messages.isEmpty()) {
+            List<Long> idsList = messages.stream().map(Message::getId).toList();
+            telegramMessageRepository.changeIsNewToFalse(idsList);
+        }
+        return messages;
+    }
 }

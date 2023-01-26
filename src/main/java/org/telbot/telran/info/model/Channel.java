@@ -10,7 +10,6 @@ public class Channel {
     private long id;
     @Column(name = "name")
     private String name;
-
     @Column(name = "group_id")
     private long groupId;
 

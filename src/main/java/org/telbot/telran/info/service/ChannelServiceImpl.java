@@ -52,4 +52,9 @@ public class ChannelServiceImpl implements ChannelService {
     public void deleteChannel(long id) {
         channelRepository.delete(getChannel(id));
     }
+
+    @Override
+    public List<Long> findAllIdsByChannelIdFromUniqueChannelIdsList(List<Long> channelIds) {
+        return channelRepository.findAllIdsByChannelIdFromUniqueChannelIdsList(channelIds);
+    }
 }

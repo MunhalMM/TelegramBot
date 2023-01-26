@@ -17,4 +17,6 @@ public interface ChannelService {
     Channel updateChannel(Channel channel);
 
     void deleteChannel(long id);
+
+    List<Long> findAllIdsByChannelIdFromUniqueChannelIdsList(List<Long> channelIds);
 }

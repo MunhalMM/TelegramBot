@@ -8,6 +8,7 @@ public class Message {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private long id;
+    private int messageId;
     @Column(name = "group_title")
     private String groupTitle;
     @Column(name = "group_id")
@@ -49,6 +50,14 @@ public class Message {
 
     public long getGroupId() {
         return groupId;
+    }
+
+    public int getMessageId() {
+        return messageId;
+    }
+
+    public void setMessageId(int messageId) {
+        this.messageId = messageId;
     }
 
     public void setGroupId(long groupId) {

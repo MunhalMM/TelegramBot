@@ -4,14 +4,13 @@ public enum Command {
     START("/start"),
     STOP("/stop");
 
-
     private String name;
 
     Command(String name) {
         this.name = name;
     }
 
-    public String getName()   {
+    public String getName() {
         return name;
     }
 }

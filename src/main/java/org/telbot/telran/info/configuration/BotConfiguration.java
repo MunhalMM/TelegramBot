@@ -15,7 +15,7 @@ import java.util.Collections;
 import java.util.List;
 
 @Configuration
-public class  BotConfiguration {
+public class BotConfiguration {
     @Bean
     @ConditionalOnMissingBean(TelegramBotsApi.class)
     public TelegramBotsApi telegramBotsApi() throws TelegramApiException {

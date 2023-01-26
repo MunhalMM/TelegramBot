@@ -9,7 +9,7 @@ import org.telbot.telran.info.service.ChannelService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/channels")
+@RequestMapping("/channel")
 public class ChannelController {
 
     @Autowired
@@ -21,7 +21,7 @@ public class ChannelController {
     }
 
     @GetMapping("/{id}")
-    public Channel getChannel(@PathVariable(name = "id") int id) {
+    public Channel getChannel(@PathVariable(name = "id") long id) {
         return channelService.getChannel(id);
     }
 
@@ -36,7 +36,7 @@ public class ChannelController {
     }
 
     @DeleteMapping("/{id}")
-    public void deleteChannel(@PathVariable(name = "id") int id) {
+    public void deleteChannel(@PathVariable(name = "id") long id) {
         channelService.deleteChannel(id);
     }
 

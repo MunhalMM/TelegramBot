@@ -3,12 +3,12 @@ package org.telbot.telran.info.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
-import org.telbot.telran.info.model.Event;
-import org.telbot.telran.info.model.Message;
-import org.telbot.telran.info.model.User;
+import org.telbot.telran.info.model.*;
 import org.telbot.telran.info.repository.EventRepository;
 
+
 import java.util.List;
+
 
 @Service
 public class EventServiceImpl implements EventService {
@@ -20,6 +20,12 @@ public class EventServiceImpl implements EventService {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private UserChannelService userChannelService;
+
+    @Autowired
+    private ChannelService channelService;
 
     @Override
     public List<Event> listAllEvent() {
@@ -58,15 +64,20 @@ public class EventServiceImpl implements EventService {
     @Scheduled(fixedRateString = "${my.fixed.delay}")
     @Override
     public void createNewEvent() {
-        List<Message> messages = messageService.listAllNewMessages();
-        //Get all Message
-        //Get all user with channel / group
-        //For every channel or group - create event for user who subscribe on this channel/group
-        //new Event - store to database
+        List<Message> messages = messageService.getMessagesAndMarkThemOld();
+        if (messages.isEmpty()) {
+            return;
+        }
+        List<Long> uniqueChannelIdsFromMessages = messages.stream().map(Message::getGroupId).distinct().toList();
+        List<Long> channelIds = channelService.findAllIdsByChannelIdFromUniqueChannelIdsList(uniqueChannelIdsFromMessages);
+        List<UserChannel> allUserChannelsByChannelIdFromIdsList = userChannelService
+                .findAllUserChannelsByChannelIdFromIdsList(channelIds);
+        String text = "Hi! You have new messages";
+        allUserChannelsByChannelIdFromIdsList.forEach(userChannel -> createEvent(new Event(userChannel.getUserId(), userChannel.getChannelId(), text)));
     }
 
     @Override
-    public List<Event> getNewEventsByUser(User user) {
+    public List<Event> getNewEventsByUser(long id) {
         return null;
     }
 }
