@@ -1,12 +1,13 @@
 package org.telbot.telran.info.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 import org.telbot.telran.info.model.Event;
 import org.telbot.telran.info.service.EventService;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/events")
@@ -15,8 +16,22 @@ public class EventController {
     @Autowired
     private EventService eventService;
 
-    @GetMapping("/{id}")
-    public Event getEvent(@PathVariable(name = "id") long id) {
-        return eventService.getEvent(id);
+    @GetMapping("/{user_id}")
+    public List<Event> getNewEventByUserId(@PathVariable(name = "user_id") long id) {
+        try {
+            return eventService.getNewEventsByUser(id);
+        } catch (IllegalArgumentException exception) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, exception.getLocalizedMessage());
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    public String removeEvent(@PathVariable(name = "id") long id) {
+        try {
+            eventService.deleteEvent(id);
+            return "Event with id " + id + " is removed";
+        } catch (IllegalArgumentException exception) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, exception.getLocalizedMessage());
+        }
     }
 }

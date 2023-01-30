@@ -2,21 +2,39 @@ package org.telbot.telran.info.model;
 
 import javax.persistence.*;
 
+/**
+ * This is the entity of the event which serves to create new messages for the user and admin
+ *
+ * @author Munhal Mammadov
+ * @version 1.0
+ */
 @Entity
 @Table(name = "event")
 public class Event {
+    /**
+     * Unique identifier for the event,which generated automatically
+     */
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private long id;
+    /**
+     * User id from entity user
+     */
     @Column(name = "user_id")
     private long userId;
-
+    /**
+     * Channel id from entity channel
+     */
     @Column(name = "channel_id")
     private long channelId;
     @Column(name = "event_for_user_channel")
     private String eventForUserChannel;
+
+    /**
+     * This field is for changing the state of our events from new ton old
+     */
     @Column(name = "is_new")
-    private boolean isNew = true;
+    private Boolean isNew = true;
 
     public Event() {
         //

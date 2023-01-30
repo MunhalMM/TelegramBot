@@ -2,22 +2,50 @@ package org.telbot.telran.info.model;
 
 import javax.persistence.*;
 
+/**
+ * This is the entity of the message where we receive messages received from the Telegram
+ *
+ * @author Munhal Mammadov
+ * @version 1.0
+ */
+
 @Entity
 @Table(name = "message")
 public class Message {
+    /**
+     * Unique identifier for the message,which generated automatically
+     */
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private long id;
-    private int messageId;
+    /**
+     * Title for group from bot
+     */
     @Column(name = "group_title")
     private String groupTitle;
+    /**
+     * Unique channel id received from bot
+     */
     @Column(name = "group_id")
     private long groupId;
+    /**
+     * Message text received from bot
+     */
     @Column(name = "text")
     private String text;
+
+    /**
+     * User name received from bot
+     */
     @Column(name = "user_name")
     private String userName;
-
+    /**
+     * Unique message id from our entity message
+     */
+    private int messageId;
+    /**
+     * Private field to determine if the message is old or new
+     */
     private boolean isNew = true;
 
     public Message() {

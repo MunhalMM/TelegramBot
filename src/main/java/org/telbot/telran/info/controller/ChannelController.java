@@ -2,7 +2,9 @@ package org.telbot.telran.info.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 import org.telbot.telran.info.model.Channel;
 import org.telbot.telran.info.service.ChannelService;
 
@@ -22,22 +24,38 @@ public class ChannelController {
 
     @GetMapping("/{id}")
     public Channel getChannel(@PathVariable(name = "id") long id) {
-        return channelService.getChannel(id);
+        try {
+            return channelService.getChannel(id);
+        } catch (IllegalArgumentException exception) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, exception.getLocalizedMessage());
+        }
     }
 
     @PostMapping
     public void createChannel(@RequestBody Channel channel) {
-        channelService.createChannel(channel);
+        try {
+            channelService.createChannel(channel);
+        } catch (IllegalArgumentException exception) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, exception.getLocalizedMessage());
+        }
     }
 
     @PutMapping
     public Channel updateChannel(@RequestBody Channel channel) {
-        return channelService.updateChannel(channel);
+        try {
+            return channelService.updateChannel(channel);
+        } catch (IllegalArgumentException exception) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, exception.getLocalizedMessage());
+        }
     }
 
     @DeleteMapping("/{id}")
     public void deleteChannel(@PathVariable(name = "id") long id) {
-        channelService.deleteChannel(id);
+        try {
+            channelService.deleteChannel(id);
+        } catch (IllegalArgumentException exception) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, exception.getLocalizedMessage());
+        }
     }
 
 }

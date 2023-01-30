@@ -1,7 +1,9 @@
 package org.telbot.telran.info.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 import org.telbot.telran.info.model.Channel;
 import org.telbot.telran.info.model.UserChannel;
 import org.telbot.telran.info.service.ChannelService;
@@ -9,6 +11,7 @@ import org.telbot.telran.info.service.UserChannelService;
 import org.telbot.telran.info.service.UserService;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping("/user_channels")
@@ -26,37 +29,65 @@ public class UserChannelController {
 
     @GetMapping
     public List<UserChannel> listAllUserChannel() {
-        return userChannelService.listAllUserChannel();
-    }
+            return userChannelService.listAllUserChannel();
+        }
 
     @GetMapping("/{id}")
     public UserChannel getUserChannel(@PathVariable(name = "id") long id) {
-        return userChannelService.getUserChannel(id);
+        try {
+            return userChannelService.getUserChannel(id);
+        } catch (IllegalArgumentException exception) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, exception.getLocalizedMessage());
+        }
+
     }
 
     @PostMapping
     public void createUserChannel(@RequestBody UserChannel userChannel) {
-        userChannelService.createUserChannel(userChannel);
+        try {
+            userChannelService.createUserChannel(userChannel);
+        } catch (NoSuchElementException exception) {
+            throw new ResponseStatusException(HttpStatus.PRECONDITION_FAILED, exception.getLocalizedMessage());
+        }
     }
 
     @PutMapping
     public UserChannel updateUserChannel(@RequestBody UserChannel userChannel) {
-        return userChannelService.updateUserChannel(userChannel);
+        try {
+            return userChannelService.updateUserChannel(userChannel);
+        } catch (IllegalArgumentException exception) {
+            throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, exception.getLocalizedMessage());
+        }
+
     }
 
     @DeleteMapping("/{id}")
     public void deleteUserChannel(@PathVariable(name = "id") long id) {
-        userChannelService.deleteUserChannel(id);
+        try {
+            userChannelService.deleteUserChannel(id);
+        } catch (NoSuchElementException exception) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, exception.getLocalizedMessage());
+        }
     }
 
     @PostMapping("/{userId}/{channelId}")
     public void addSubscription(@PathVariable(name = "userId") long userId, @PathVariable(name = "channelId") long channelId) {
-        userChannelService.addSubscription(userService.getUser(userId), channelService.getChannel(channelId));
+        try {
+            userChannelService.addSubscription(userService.getUser(userId), channelService.getChannel(channelId));
+        } catch (IllegalArgumentException exception) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, exception.getLocalizedMessage());
+        }
+
     }
 
     @GetMapping("/{userId}")
     public List<Channel> findAllChannelByUser(@PathVariable(name = "userId") long userId) {
-        return userChannelService.findAllChannelByUser(userService.getUser(userId));
+        try {
+            return userChannelService.findAllChannelByUser(userService.getUser(userId));
+        } catch (IllegalArgumentException exception) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, exception.getLocalizedMessage());
+        }
+
     }
 
 }

@@ -2,16 +2,30 @@ package org.telbot.telran.info.model;
 
 import javax.persistence.*;
 
+/**
+ * This is an entity created for the entities user and channel to determine which channels the user ia subscribed to
+ *
+ * @author Munhal Mammdov
+ * @version 1.0
+ */
+
 @Entity
 @Table(name = "user_channel")
 public class UserChannel {
+    /**
+     * Unique identifier for the user_channel,which generated automatically
+     */
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private long id;
-
+    /**
+     * This is our id for user
+     */
     @Column(name = "user_id")
     private long userId;
-
+    /**
+     * This is our id for channel
+     */
     @Column(name = "channel_id")
     private long channelId;
 
@@ -46,5 +60,14 @@ public class UserChannel {
 
     public void setChannelId(long channelId) {
         this.channelId = channelId;
+    }
+
+    @Override
+    public String toString() {
+        return "UserChannel{" +
+                "id=" + id +
+                ", userId=" + userId +
+                ", channelId=" + channelId +
+                '}';
     }
 }

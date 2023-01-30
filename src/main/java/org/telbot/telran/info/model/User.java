@@ -1,15 +1,35 @@
 package org.telbot.telran.info.model;
 
+import org.telbot.telran.info.configuration.BotRole;
+
 import javax.persistence.*;
 
+/**
+ * This is one of the main entities that create users with roles to receive events from channel of group telegram
+ *
+ * @author Munhal Mammadov
+ * @version 1.0
+ */
+
 @Entity
-@Table(name = "user_")
+@Table(name = "users")
 public class User {
+    /**
+     * Unique identifier for the user,which generated automatically
+     */
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private long id;
+    /**
+     * This is field to define the username
+     */
     @Column(name = "user_name")
     private String userName;
+    /**
+     * This is field to define the user role user or admin
+     */
+    @Enumerated(EnumType.STRING)
+    private BotRole userRole;
 
     public User() {
         //
@@ -40,6 +60,13 @@ public class User {
         this.userName = userName;
     }
 
+    public BotRole getUserRole() {
+        return userRole;
+    }
+
+    public void setUserRole(BotRole userRole) {
+        this.userRole = userRole;
+    }
 
     @Override
     public String toString() {
